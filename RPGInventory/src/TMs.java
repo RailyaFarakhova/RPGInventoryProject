@@ -12,6 +12,8 @@ public class TMs extends Item{
         super(name, type);
     }
 
+    public boolean isUsed(){ return used;}
+
     public void use(){
         health = 0;
         used = true;

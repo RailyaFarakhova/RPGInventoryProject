@@ -63,6 +63,10 @@ public class Storage {
             }
         }
         --spaceAvailable;
+
+        if(spaceAvailable == 0){
+            System.out.println("You're out of space!");
+        }
     }
 
     public void removeItem(int slot, Item item){
@@ -89,6 +93,8 @@ public class Storage {
                     KeyItems.remove(slot, item);
                     break;
             }
+            // This is having a bug.
+            ++spaceAvailable;
         }
     }
 
@@ -105,9 +111,8 @@ public class Storage {
 
     public void open(){
         open = true;
-        int spaceUsed = totalSpace - spaceAvailable;
 
-        System.out.println("\nThis is your bag: \n\nSPACE USED: " + spaceUsed + "/" + totalSpace);
+        System.out.println("\nThis is your bag: ");
         for(int m = 1; m < pattern; m++) {
             System.out.print("_");
         }
@@ -141,6 +146,8 @@ public class Storage {
             } else if(Items.get(i).isUsed()){
                 addItem(i, new Item(".", "items"));
                 System.out.print(Items.get(i).getName());
+                nameLength = 1;
+                removeItem(i, new Item(".", "items"));
             } else {
                 String item = Items.get(i).getName();
                 nameLength = item.length();
@@ -156,7 +163,9 @@ public class Storage {
                 nameLength = 1;
             } else if(PokeBalls.get(i).isUsed()){
                 addItem(i, new Item(".", "poke balls"));
-                System.out.print(Items.get(i).getName());
+                System.out.print(PokeBalls.get(i).getName());
+                nameLength = 1;
+                removeItem(i, new Item(".", "items"));
             } else {
                 String item = PokeBalls.get(i).getName();
                 nameLength = item.length();
@@ -172,7 +181,9 @@ public class Storage {
                 nameLength = 1;
             } else if(TMs.get(i).isUsed()){
                 addItem(i, new Item(".", "tms"));
-                System.out.print(Items.get(i).getName());
+                System.out.print(TMs.get(i).getName());
+                nameLength = 1;
+                removeItem(i, new Item(".", "items"));
             } else {
                 String item = TMs.get(i).getName();
                 nameLength = item.length();
@@ -188,7 +199,9 @@ public class Storage {
                 nameLength = 1;
             } else if(Berries.get(i).isUsed()){
                 addItem(i, new Item(".", "berries"));
-                System.out.print(Items.get(i).getName());
+                System.out.print(Berries.get(i).getName());
+                nameLength = 1;
+                removeItem(i, new Item(".", "items"));
             } else {
                 String item = Berries.get(i).getName();
                 nameLength = item.length();
@@ -204,7 +217,9 @@ public class Storage {
                 nameLength = 1;
             } else if(Medicines.get(i).isUsed()){
                 addItem(i, new Item(".", "medicines"));
-                System.out.print(Items.get(i).getName());
+                System.out.print(Medicines.get(i).getName());
+                nameLength = 1;
+                removeItem(i, new Item(".", "items"));
             } else {
                 String item = Medicines.get(i).getName();
                 nameLength = item.length();
@@ -219,8 +234,10 @@ public class Storage {
                 System.out.print(".");
                 nameLength = 1;
             }else if(KeyItems.get(i).isUsed()){
-                removeItem(i, KeyItems.get(i));
-                System.out.print(Items.get(i).getName());
+                addItem(i, new Item(".", "key items"));
+                System.out.print(KeyItems.get(i).getName());
+                nameLength = 1;
+                removeItem(i, new Item(".", "items"));
             } else {
                 String item = KeyItems.get(i).getName();
                 nameLength = item.length();
@@ -234,6 +251,10 @@ public class Storage {
         for(int m = 1; m < pattern; m++){
             System.out.print("_");
         }
+
+        int spaceUsed = totalSpace - spaceAvailable;
+        System.out.println(spaceAvailable);
+        System.out.println("\nSPACE USED: " + spaceUsed + "/" + totalSpace);
     }
 
 

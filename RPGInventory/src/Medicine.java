@@ -5,20 +5,26 @@ public class Medicine extends Item{
 
     public Medicine(String name){
         this.name = name;
-        String type = "medicine";
+        String type = "medicines";
         health = 100;
         used = false;
 
         super(name, type);
+    }
+    public boolean isUsed(){ return used;}
+
+    public int getHealth(){
+        System.out.println("\nYou have " + health + "% of " + getName() + " remaining!\n");
+        return health;
     }
 
     public void use(){
         if(health == 0){
             used = true;
         }else{
-            health-=20;
+            health = health - 20;
         }
-        System.out.println("\nYou've used " + getHealth() + "% of " + getName() + "!\n");
+        getHealth();
     }
 
 }

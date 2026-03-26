@@ -53,6 +53,8 @@ public class Berries extends Item{
         }
     }
 
+    public boolean isUsed(){ return used;}
+
     public void use(){
         health = 0;
         used = true;

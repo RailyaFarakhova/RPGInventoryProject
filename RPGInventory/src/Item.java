@@ -26,11 +26,8 @@ public class Item {
     }
 
     public void use(){
-        if(health == 0){
-            used = true;
-        }else{
-            health-=20;
-        }
+        health = 0;
+        used = true;
         System.out.println("\nYou've used " + getName() + "!\n");
     }
 }
